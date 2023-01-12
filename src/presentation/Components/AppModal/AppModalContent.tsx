@@ -1,0 +1,70 @@
+import React, { useContext, useRef } from "react";
+import { AppModalContext } from "./AppModal";
+import { useClickAway } from "react-use";
+import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
+
+export interface AppModalContentProps
+  extends React.ComponentPropsWithoutRef<"div"> {}
+
+export const AppModalContent = ({
+  children,
+  className,
+  ...props
+}: AppModalContentProps) => {
+  const { onClose, size } = useContext(AppModalContext);
+  const ref = useRef<HTMLDivElement>(null);
+  useClickAway(ref, onClose);
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className={clsx(
+          " bg-clip-padding backdrop-filter backdrop-blur-sm mx-auto",
+          {
+            "max-w-xs": size === "xs",
+            "max-w-sm": size === "sm",
+            "max-w-md": size === "md",
+            "max-w-lg": size === "lg",
+            "max-w-xl": size === "xl",
+            "max-w-2xl": size === "2xl",
+            "max-w-3xl": size === "3xl",
+            "max-w-4xl": size === "4xl",
+            "max-w-5xl": size === "5xl",
+            "max-w-6xl": size === "6xl",
+            "max-w-7xl": size === "7xl",
+          },
+          className
+        )}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div
+          ref={ref}
+          className={clsx(
+            " mx-auto rounded-md relative text-gray-100 border border-white border-opacity-10 bg-primary-800 bg-opacity-30",
+            {
+              "max-w-xs": size === "xs",
+              "max-w-sm": size === "sm",
+              "max-w-md": size === "md",
+              "max-w-lg": size === "lg",
+              "max-w-xl": size === "xl",
+              "max-w-2xl": size === "2xl",
+              "max-w-3xl": size === "3xl",
+              "max-w-4xl": size === "4xl",
+              "max-w-5xl": size === "5xl",
+              "max-w-6xl": size === "6xl",
+              "max-w-7xl": size === "7xl",
+            },
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
