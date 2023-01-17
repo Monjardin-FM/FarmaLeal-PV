@@ -1,5 +1,7 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import "../../index.css";
 
 export interface IRoute {
   key: string | number;
@@ -13,23 +15,32 @@ export interface AppRouterProps {
 }
 
 export const AppRouter = ({ routes }: AppRouterProps) => {
+  let location = useLocation();
   return (
     <>
-      {routes && routes.length > 0 && (
-        <Routes>
-          {routes?.map((route) => (
-            <Route
-              key={route.key}
-              path={route.path}
-              element={<route.component />}
-            >
-              {route.routes?.map((r) => (
-                <Route key={r.key} path={r.path} element={<r.component />} />
+      <TransitionGroup>
+        <CSSTransition key={location.pathname} classNames="fade" timeout={1000}>
+          {routes && routes.length > 0 && (
+            <Routes location={location}>
+              {routes?.map((route) => (
+                <Route
+                  key={route.key}
+                  path={route.path}
+                  element={<route.component />}
+                >
+                  {route.routes?.map((r) => (
+                    <Route
+                      key={r.key}
+                      path={r.path}
+                      element={<r.component />}
+                    />
+                  ))}
+                </Route>
               ))}
-            </Route>
-          ))}
-        </Routes>
-      )}
+            </Routes>
+          )}
+        </CSSTransition>
+      </TransitionGroup>
     </>
   );
 };

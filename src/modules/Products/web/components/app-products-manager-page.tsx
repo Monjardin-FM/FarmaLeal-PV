@@ -7,7 +7,7 @@ export const ProductsManagerPage = () => {
   const [toggleAddProductModal, setToggleAddProductModal] =
     useState<boolean>(false);
   return (
-    <div>
+    <>
       <AppAddProductModal
         isVisible={toggleAddProductModal}
         onClose={() => {
@@ -26,6 +26,6 @@ export const ProductsManagerPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AppFormField } from "../../../../../presentation/Components/AppForm/AppFormField";
 import { AppFormLabel } from "../../../../../presentation/Components/AppForm/AppFormLabel";
 import AppTextField from "../../../../../presentation/Components/AppTextField";
 import { AppButton } from "../../../../../presentation/Components/AppButton";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
+import { Product } from "../../../domain/entities/product";
+import { FormikErrors } from "formik";
 
 export type ProductTagsFormProps = {
   tags: string[];
   addTags: (tag: string) => void;
   deleteTag: (idTag: number) => void;
+  values: Product;
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => Promise<void> | Promise<FormikErrors<Product>>;
 };
 export const ProductTagsForm = ({
   tags,
   addTags,
   deleteTag,
+  setFieldValue,
+  values,
 }: ProductTagsFormProps) => {
   const [tag, setTag] = useState<string>("");
+
+  useEffect(() => {
+    setFieldValue("tags", tags);
+  }, [tags]);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -50,7 +64,7 @@ export const ProductTagsForm = ({
           </div>
         </div>
       </div>
-      <div className="flex flex-row flex-wrap w-3/5 border border-white border-opacity-20 h-fit self-start rounded-lg bg-black bg-opacity-25 p-5 gap-2">
+      <div className="flex flex-row flex-wrap w-3/6 border border-white border-opacity-20 h-fit self-start rounded-lg bg-black bg-opacity-25 p-5 gap-2">
         {tags.map((t, index) => (
           <div key={index} className="text-sm h-fit">
             <div className="bg-primary-500 rounded-xl flex flex-row justify-center items-center px-3 py-1 w-fit gap-1">

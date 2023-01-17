@@ -22,19 +22,15 @@ const items = [
 ];
 
 const NameProductColumn = () => {
-  return <div className="flex items-center space-x-3">Producto</div>;
+  return <div className="flex items-center space-x-3">Clave/Descripción</div>;
 };
 
 const DescripcionProductColumn = () => {
-  return <div className="flex items-center space-x-3">Descripción</div>;
+  return <div className="flex items-center space-x-3">Existencia</div>;
 };
 
 const Column1 = () => {
-  return <div className="flex items-center space-x-3">Descripción</div>;
-};
-
-const Column2 = () => {
-  return <div className="flex items-center space-x-3">Descripción</div>;
+  return <div className="flex items-center space-x-3">Precio</div>;
 };
 
 const actions = () => {
@@ -44,29 +40,24 @@ const actions = () => {
 export const AppTableProducts = () => {
   const columns: AppDataGridColumn<any>[] = [
     {
-      key: "ProductName",
+      key: "key",
       dataIndex: "ProductName",
-      title: "Nombre del Producto",
+      title: "Clave/Descripción",
       render: NameProductColumn,
     },
     {
-      key: "descriptionProduct",
-      dataIndex: "descriptionProduct",
-      title: "Descripción del Producto",
+      key: "inventary",
+      dataIndex: "inventary",
+      title: "Exitencia",
       render: DescripcionProductColumn,
     },
     {
-      key: "descriptionProduct",
-      dataIndex: "descriptionProduct",
-      title: "Descripción del Producto",
+      key: "price",
+      dataIndex: "price",
+      title: "Precio",
       render: Column1,
     },
-    {
-      key: "descriptionProduct",
-      dataIndex: "descriptionProduct",
-      title: "Descripción del Producto",
-      render: Column2,
-    },
+
     {
       key: "actionsProduct",
       dataIndex: "actionsProduct",

@@ -1,18 +1,19 @@
 import React from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
+import clsx from "clsx";
 
 type AppCardFileStatusProps = {
   picture: any;
   start?: () => void;
   end?: () => void;
   title: string;
-  styles: string;
+  // styles: string;
   text: string;
 };
 
 export const AppCardFileStatus = ({
   picture,
-  styles,
+  // styles,
   text,
   title,
   end,
@@ -23,23 +24,21 @@ export const AppCardFileStatus = ({
       draggable={true}
       onDragOverCapture={start}
       onDragLeaveCapture={end}
-      className={styles}
+      className={clsx(
+        "w-full flex flex-col items-center content-center bg-black bg-opacity-25 border-dashed border-2 border-opacity-40 cursor-pointer border-gray-300  py-4 rounded-lg"
+      )}
     >
-      <div className=" w-full flex flex-col justify-center items-center">
-        <div className="w-44">
-          <Player
-            src={picture}
-            autoplay
-            loop
-            style={{
-              width: "100%",
-              height: "100%",
-            }}
-          />
-        </div>
-        <p className="mt-4 font-semibold text-gray-200">{title}</p>
-        <p className="text-sm text-gray-300 mt-3">{text}</p>
-      </div>
+      <Player
+        src={picture}
+        autoplay
+        loop
+        style={{
+          width: "35%",
+          // height: "45%",
+        }}
+      />
+      <p className="mt-4 font-semibold text-gray-200">{title}</p>
+      <p className="text-sm text-gray-300 mt-3">{text}</p>
     </div>
   );
 };

@@ -84,7 +84,7 @@ export const Menu = ({ isVisible, onClose }: MenuProps) => {
               <MenuItemLink
                 lottie={Password}
                 label="Cambio de contraseña"
-                to=""
+                to="/changepassword"
                 onClose={() => onClose()}
               />
               <MenuItemLink

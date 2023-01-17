@@ -10,14 +10,18 @@ export const AppContainerBox = ({
   ...props
 }: AppContainerBoxProps) => {
   return (
-    <div
-      className={clsx(
-        "flex flex-col items-center  border border-gray-50 border-opacity-20 text-gray-100 font-normal p-2 rounded-md bg-black bg-opacity-20 backdrop-filter backdrop-blur-md shadow-black shadow-lg ",
-        className
-      )}
-      {...props}
-    >
-      {children}
+    <div className="flex justify-center">
+      <div className="bg-black bg-opacity-20 container">
+        <div
+          className={clsx(
+            "flex flex-col  border border-gray-50 border-opacity-20 text-gray-100 font-normal p-2 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md ",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </div>
+      </div>
     </div>
   );
 };
