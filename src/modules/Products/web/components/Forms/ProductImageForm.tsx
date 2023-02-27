@@ -11,6 +11,7 @@ import NotImage from "../../../../../assets/img/Image_not_available.png";
 import { ImCancelCircle } from "react-icons/im";
 import { Product } from "../../../domain/entities/product";
 import { FormikErrors } from "formik";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 export type ProductImageProps = {
   file: File | undefined;
   onUpload: (file: File | null) => void;
@@ -33,6 +34,7 @@ export const ProductImageForm = ({
   const [dragging, setDragging] = useState(false);
   const [picture, setPicture] = useState<any>(Drop);
   const [preview, setPreview] = useState("");
+  const [parent] = useAutoAnimate();
   const onChange = (file: File) => {
     setDragging(false);
     onUpload(file);
@@ -107,7 +109,10 @@ export const ProductImageForm = ({
           </FileUploader>
         </div>
         {file ? (
-          <div className="col-span-1 flex flex-row items-center justify-center">
+          <div
+            ref={parent}
+            className="col-span-1 flex flex-row items-center justify-center"
+          >
             <div className="w-56 rounded-xl border border-white border-opacity-40">
               <div className="relative">
                 <div
@@ -123,7 +128,10 @@ export const ProductImageForm = ({
             </div>
           </div>
         ) : (
-          <div className="col-span-1 flex flex-row items-center justify-center bg-black bg-opacity-25 rounded-xl m-5 border border-white border-opacity-40">
+          <div
+            ref={parent}
+            className="col-span-1 flex flex-row items-center justify-center bg-black bg-opacity-25 rounded-xl m-5 border border-white border-opacity-40"
+          >
             <img src={NotImage} alt="" />
           </div>
         )}

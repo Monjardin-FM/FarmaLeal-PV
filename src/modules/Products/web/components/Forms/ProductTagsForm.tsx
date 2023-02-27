@@ -7,6 +7,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
 import { Product } from "../../../domain/entities/product";
 import { FormikErrors } from "formik";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export type ProductTagsFormProps = {
   tags: string[];
@@ -27,6 +28,7 @@ export const ProductTagsForm = ({
   values,
 }: ProductTagsFormProps) => {
   const [tag, setTag] = useState<string>("");
+  const [parent] = useAutoAnimate({ duration: 300 });
 
   useEffect(() => {
     setFieldValue("tags", tags);
@@ -37,7 +39,7 @@ export const ProductTagsForm = ({
       <div className="grid grid-cols-12  w-full">
         <div className="col-span-6 ">
           <div className="flex flex-row  justify-center gap-5 mb-5">
-            <div className="w-full">
+            <div ref={parent} className="w-full">
               <AppFormField>
                 <AppFormLabel>Tag:</AppFormLabel>
                 <AppTextField
@@ -64,7 +66,10 @@ export const ProductTagsForm = ({
           </div>
         </div>
       </div>
-      <div className="flex flex-row flex-wrap w-3/6 border border-white border-opacity-20 h-fit self-start rounded-lg bg-black bg-opacity-25 p-5 gap-2">
+      <div
+        ref={parent}
+        className="flex flex-row flex-wrap w-3/6 border border-white border-opacity-20 h-fit self-start rounded-lg bg-black bg-opacity-25 p-5 gap-2"
+      >
         {tags.map((t, index) => (
           <div key={index} className="text-sm h-fit">
             <div className="bg-primary-500 rounded-xl flex flex-row justify-center items-center px-3 py-1 w-fit gap-1">

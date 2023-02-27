@@ -58,7 +58,7 @@ export function AppDataGrid<T>({
 
   return (
     <AppTable>
-      <AppThead className="">
+      <AppThead className="top-0 sticky">
         <AppTr>
           {rowSelection && (
             <AppTh align="center">

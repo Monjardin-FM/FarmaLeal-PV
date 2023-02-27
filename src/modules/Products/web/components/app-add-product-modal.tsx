@@ -25,7 +25,6 @@ import { AppButton } from "../../../../presentation/Components/AppButton";
 import { BiSave } from "react-icons/bi";
 import { Product } from "../../domain/entities/product";
 import * as Yup from "yup";
-import { AppSwal } from "../../../../presentation/Components/AppSwal";
 import { AppToast } from "../../../../presentation/Components/AppToastNotification";
 
 type AppAddProductModalProps = {

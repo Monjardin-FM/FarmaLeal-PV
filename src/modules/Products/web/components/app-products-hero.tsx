@@ -15,10 +15,10 @@ export const AppProductsHero = ({
 }: AppProductsHeroProps) => {
   return (
     <>
-      <AppHero size="lg" className="mt-1">
+      <AppHero size="lg" className="mt-1 ">
         <AppHeroContent>
-          <AppContainerBox>
-            <div className="w-full py-2 px-20 flex flex-col items-center">
+          <AppContainerBox className="p-2">
+            <div className="w-full  px-20 flex flex-col items-center">
               <div className="mb-5">
                 <p className="text-lg font-semibold text-white center">
                   Administrador de Artículos

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AppProductsHero } from "./app-products-hero";
 import { AppTableProducts } from "./Table/app-table-products";
 import { AppAddProductModal } from "./app-add-product-modal";
+import { AppContainerBox } from "../../../../presentation/Components/AppContainerBox";
 
 export const ProductsManagerPage = () => {
   const [toggleAddProductModal, setToggleAddProductModal] =
@@ -14,15 +15,18 @@ export const ProductsManagerPage = () => {
           setToggleAddProductModal(false);
         }}
       />
+      <div className="flex flex-col justify-center h-screen w-screen ">
+        <AppProductsHero
+          setToggleAddProductModal={() => setToggleAddProductModal(true)}
+        />
 
-      <AppProductsHero
-        setToggleAddProductModal={() => setToggleAddProductModal(true)}
-      />
-
-      <div className="flex justify-center">
-        <div className=" bg-black bg-opacity-20 rounded-xl mb-20 container lg:w-11/12">
-          <div className="bg-clip-padding backdrop-filter backdrop-blur-md">
-            <AppTableProducts />
+        <div className=" flex justify-center overflow-y-auto overflow-x-auto mb-10 ">
+          <div className="w-11/12">
+            <AppContainerBox>
+              <div className="">
+                <AppTableProducts />
+              </div>
+            </AppContainerBox>
           </div>
         </div>
       </div>

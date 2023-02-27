@@ -19,7 +19,7 @@ export const AppRouter = ({ routes }: AppRouterProps) => {
   return (
     <>
       <TransitionGroup>
-        <CSSTransition key={location.pathname} classNames="fade" timeout={1000}>
+        <CSSTransition key={location.pathname} classNames="fade" timeout={500}>
           {routes && routes.length > 0 && (
             <Routes location={location}>
               {routes?.map((route) => (

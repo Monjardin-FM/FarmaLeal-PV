@@ -1,6 +1,6 @@
 import { ChangePasswordManagerPage } from "./modules/ChangePassword/change-passowrd-manager-page";
 import { SelectClientMandateForm } from "./modules/Customer/web/components/login-client-mandate-form";
-import { SellsManagerPage } from "./modules/Sells/sells-manager-page";
+import { SellsManagerPage } from "./modules/Sells/web/components/sells-manager-page";
 import { RegisterCutManagerPage } from "./modules/Register-Cut/register-cut-manager-page";
 import { AppHome } from "./presentation/Components/AppHome/index";
 import { InventaryManagerPage } from "./modules/Inventary/Inventary-manager-page";

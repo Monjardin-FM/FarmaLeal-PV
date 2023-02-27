@@ -5,7 +5,7 @@ export interface AppTheadProps
 
 export const AppThead = ({ children, className, ...props }: AppTheadProps) => (
   <thead
-    className={classNames("bg-gray-100 bg-opacity-30", className)}
+    className={classNames("bg-primary-900 bg-opacity-95", className)}
     {...props}
   >
     {children}

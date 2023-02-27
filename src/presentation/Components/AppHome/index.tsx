@@ -5,8 +5,8 @@ import FarmaLealLogo from "../../../assets/img/farmaleal-logo.png";
 export const AppHome = () => {
   return (
     <div className="flex justify-center items-center content-center w-screen">
-      <div className="flex flex-col justify-center items-center  w-2/3">
-        <div className="w-2/3 p-10">
+      <div className="flex flex-col justify-center items-center">
+        <div className="w-4/5 p-10">
           <Player
             src={Pharmacy}
             autoplay
