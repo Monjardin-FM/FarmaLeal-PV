@@ -14,7 +14,6 @@ import { useGetMandatoLocalStorage } from "../../../modules/Customer/web/hooks/u
 import "../../../assets/css/background.css";
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from "react-icons/ai";
 import { motion } from "framer-motion";
-import clsx from "clsx";
 
 export const AppLayout = () => {
   const ref = useRef(null);
@@ -35,7 +34,7 @@ export const AppLayout = () => {
     visible: { opacity: 1, transition: { type: "spring", duration: 0.75 } },
     hidden: {
       opacity: 1,
-      x: "85%",
+      x: "96%",
       transition: { type: "spring", duration: 0.75 },
     },
   };
@@ -67,17 +66,17 @@ export const AppLayout = () => {
             animate={visible ? "visible" : "hidden"}
             variants={variantsUserInformation}
             exit="hidden"
-            className="z-10 absolute top-1 -right-2 h-56 flex flex-row justify-center items-center w-48  backdrop-filter  bg-clip-padding backdrop-blur-sm "
+            className="z-10 absolute w-48 top-1 right-0.5 flex flex-row justify-center items-center  backdrop-filter  bg-clip-padding backdrop-blur-sm "
           >
             <div
-              className={clsx(
-                " h-4/5 w-3 rounded-md border-l border-b border-t border-white  border-opacity-40 hover:border-opacity-40 hover:bg-white hover:bg-opacity-20 hover:cursor-pointer transition duration-300 "
-              )}
+              className={
+                "  h-28 w-3 rounded-md border-l border-b border-t border-white  border-opacity-40 hover:border-opacity-40 hover:bg-white hover:bg-opacity-20 hover:cursor-pointer transition duration-300 "
+              }
               onClick={() => {
                 onHideUserInformation();
               }}
             >
-              <div className="absolute top-1/2 text-white text-opacity-70">
+              <div className="absolute top-1/2 text-white text-opacity-70 left-0">
                 {visible ? (
                   <AiOutlineCaretRight size={15} />
                 ) : (
@@ -86,12 +85,23 @@ export const AppLayout = () => {
               </div>
             </div>
             <div>
-              <AppContainerBox className="text-xs h-36 w-40 items-center p-2">
-                <div className="mb-3 bg-white rounded-full p-2 bg-opacity-20">
+              <AppContainerBox className="flex items-center justify-center p-2 text-xs gap-2">
+                <div className="bg-white rounded-full p-2 bg-opacity-20">
                   <CiUser size="1.5rem" />
                 </div>
                 <div>{`${user.firstname} ${user.lastname} `}</div>
-                <div className="mt-2">
+
+                <div className="flex flex-col">
+                  <div className="text-gray-400">
+                    Cliente:{" "}
+                    <span className="font-semibold text-white">{` ${convenio?.descripcion}`}</span>
+                  </div>
+                  <div className="text-gray-400 w-fit ">
+                    Sucursal:{" "}
+                    <span className="font-semibold text-white">{` ${mandato?.descripcion}`}</span>
+                  </div>
+                </div>
+                <div>
                   <AppButton
                     colorScheme="danger"
                     variant="ghost"
@@ -106,24 +116,6 @@ export const AppLayout = () => {
                   </AppButton>
                 </div>
               </AppContainerBox>
-              <div>
-                <AppContainerBox className="text-xs w-40 h-16 items-center p-2">
-                  <div className="text-xs">
-                    <div className="flex flex-row">
-                      <div className="text-gray-400 mr-1">
-                        Cliente:{" "}
-                        <span className="font-semibold text-white">{` ${convenio?.descripcion}`}</span>
-                      </div>
-                    </div>
-                    <div className="flex flex-row">
-                      <div className="text-gray-400 mr-1">
-                        Sucursal:{" "}
-                        <span className="font-semibold text-white">{` ${mandato?.descripcion}`}</span>
-                      </div>
-                    </div>
-                  </div>
-                </AppContainerBox>
-              </div>
             </div>
           </motion.div>
         </div>
