@@ -17,17 +17,13 @@ export const AppProductsHero = ({
     <>
       <AppHero size="lg" className="mt-1 ">
         <AppHeroContent>
-          <AppContainerBox className="p-2">
-            <div className="w-full  px-20 flex flex-col items-center">
-              <div className="mb-5">
-                <p className="text-lg font-semibold text-white center">
-                  Administrador de Artículos
-                </p>
-              </div>
-              <div className="flex flex-row max-w-3xl w-full justify-center items-center">
-                <div className="mr-1 w-full">
-                  <AppTextField placeholder="Buscar Artículo" type="text" />
-                </div>
+          <AppContainerBox className="p-4">
+            <div className="w-full  px-20 flex flex-col items-center gap-y-5">
+              <p className="text-lg font-semibold text-white center">
+                Administrador de Artículos
+              </p>
+              <div className="flex flex-row max-w-3xl w-full justify-center items-center gap-1">
+                <AppTextField placeholder="Buscar Artículo" type="text" />
                 <AppButton
                   variant="outline"
                   className="border-opacity-40"
@@ -38,19 +34,15 @@ export const AppProductsHero = ({
               </div>
               <div className="flex flex-row max-w-3xl w-full justify-start items-center text-white h-16 mt-6 ">
                 <div className="flex flex-col justify-center items-center ">
-                  <div>
-                    <AppButton
-                      variant="ghost"
-                      colorScheme="info"
-                      onClick={() => {
-                        setToggleAddProductModal();
-                      }}
-                    >
-                      <div className="bg-transparent rounded-full  hover:rounded-full  transition duration-500">
-                        <IoIosAddCircle size="2.3em" color="green" />
-                      </div>
-                    </AppButton>
-                  </div>
+                  <AppButton
+                    variant="ghost"
+                    colorScheme="info"
+                    onClick={() => {
+                      setToggleAddProductModal();
+                    }}
+                  >
+                    <IoIosAddCircle size="2.3em" color="green" />
+                  </AppButton>
                   <div className="">Agregar Artículo</div>
                 </div>
               </div>

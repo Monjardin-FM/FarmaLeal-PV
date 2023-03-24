@@ -15,6 +15,13 @@ export const AppModalContent = ({
   const { onClose, size } = useContext(AppModalContext);
   const ref = useRef<HTMLDivElement>(null);
   useClickAway(ref, onClose);
+  const isVisible = React.useContext(AppModalContext);
+  const variantModal = {
+    visible: { opacity: 1, transition: { type: "ease", duration: 0.5 } },
+    hidden: {
+      opacity: 0,
+    },
+  };
 
   return (
     <AnimatePresence>
@@ -36,10 +43,9 @@ export const AppModalContent = ({
           },
           className
         )}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.4 }}
+        variants={variantModal}
+        initial="hidden"
+        animate={isVisible.isVisible ? "visible" : "hidden"}
       >
         <div
           ref={ref}

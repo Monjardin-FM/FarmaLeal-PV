@@ -17,11 +17,13 @@ export type AppModalSize =
 export type AppModalContextType = {
   onClose: () => void;
   size: AppModalSize;
+  isVisible: boolean;
 };
 
 export const AppModalContext = React.createContext<AppModalContextType>({
   onClose: () => {},
   size: "md",
+  isVisible: false,
 });
 
 export interface AppModalProps {
@@ -39,7 +41,7 @@ export const AppModal = ({
 }: AppModalProps) => {
   useLockBodyScroll(isVisible);
   return (
-    <AppModalContext.Provider value={{ onClose, size }}>
+    <AppModalContext.Provider value={{ onClose, size, isVisible }}>
       {isVisible && (
         <div className="fixed inset-0 z-50 overflow-y-auto  ">{children}</div>
       )}

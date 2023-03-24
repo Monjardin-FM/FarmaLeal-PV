@@ -22,11 +22,7 @@ export const ProductsManagerPage = () => {
 
         <div className=" flex justify-center overflow-y-auto overflow-x-auto mb-10 ">
           <div className="w-11/12">
-            <AppContainerBox>
-              <div className="">
-                <AppTableProducts />
-              </div>
-            </AppContainerBox>
+            <AppContainerBox>{/* <AppTableProducts /> */}</AppContainerBox>
           </div>
         </div>
       </div>

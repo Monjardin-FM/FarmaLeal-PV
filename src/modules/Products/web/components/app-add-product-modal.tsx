@@ -26,6 +26,7 @@ import { BiSave } from "react-icons/bi";
 import { Product } from "../../domain/entities/product";
 import * as Yup from "yup";
 import { AppToast } from "../../../../presentation/Components/AppToastNotification";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 type AppAddProductModalProps = {
   isVisible: boolean;
@@ -40,6 +41,7 @@ export const AppAddProductModal = ({
 
   const [tags, setTags] = useState<string[]>([]);
   const [file, setFile] = useState<File>();
+  const [parent] = useAutoAnimate({ duration: 300 });
 
   const addTags = (tag: string) => {
     setTags((prevTags) => [...prevTags, tag]);
@@ -152,7 +154,7 @@ export const AppAddProductModal = ({
           </AppModalHeader>
           <AppModalCloseButton />
           <AppModalBody>
-            <div className="grid grid-cols-1">
+            <div className="grid grid-cols-1" ref={parent}>
               <AppTabs
                 index={selectedTab}
                 onChange={(index) => setSelectedTab(index)}
@@ -165,49 +167,51 @@ export const AppAddProductModal = ({
                   <AppTab>Proveedores</AppTab>
                 </AppTabList>
                 <form onSubmit={handleSubmit}>
-                  <AppTabPanels>
-                    <AppTabPanel>
-                      <ProductDetailForm
-                        values={values}
-                        handleChange={handleChange}
-                        errors={errors}
-                        handleBlur={handleBlur}
-                        touched={touched}
-                        setFieldValue={setFieldValue}
-                      />
-                    </AppTabPanel>
-                    <AppTabPanel>
-                      <ProductAditionalForm
-                        values={values}
-                        handleChange={handleChange}
-                        errors={errors}
-                        handleBlur={handleBlur}
-                        touched={touched}
-                        setFieldValue={setFieldValue}
-                      />
-                    </AppTabPanel>
-                    <AppTabPanel>
-                      <ProductImageForm
-                        file={file}
-                        onUpload={onChange}
-                        values={values}
-                        handleChange={handleChange}
-                        setFieldValue={setFieldValue}
-                      />
-                    </AppTabPanel>
-                    <AppTabPanel>
-                      <ProductTagsForm
-                        addTags={addTags}
-                        tags={tags}
-                        deleteTag={deleteTag}
-                        values={values}
-                        setFieldValue={setFieldValue}
-                      />
-                    </AppTabPanel>
-                    <AppTabPanel>
-                      <ProductProviderForm />
-                    </AppTabPanel>
-                  </AppTabPanels>
+                  <div ref={parent}>
+                    <AppTabPanels>
+                      <AppTabPanel>
+                        <ProductDetailForm
+                          values={values}
+                          handleChange={handleChange}
+                          errors={errors}
+                          handleBlur={handleBlur}
+                          touched={touched}
+                          setFieldValue={setFieldValue}
+                        />
+                      </AppTabPanel>
+                      <AppTabPanel>
+                        <ProductAditionalForm
+                          values={values}
+                          handleChange={handleChange}
+                          errors={errors}
+                          handleBlur={handleBlur}
+                          touched={touched}
+                          setFieldValue={setFieldValue}
+                        />
+                      </AppTabPanel>
+                      <AppTabPanel>
+                        <ProductImageForm
+                          file={file}
+                          onUpload={onChange}
+                          values={values}
+                          handleChange={handleChange}
+                          setFieldValue={setFieldValue}
+                        />
+                      </AppTabPanel>
+                      <AppTabPanel>
+                        <ProductTagsForm
+                          addTags={addTags}
+                          tags={tags}
+                          deleteTag={deleteTag}
+                          values={values}
+                          setFieldValue={setFieldValue}
+                        />
+                      </AppTabPanel>
+                      <AppTabPanel>
+                        <ProductProviderForm />
+                      </AppTabPanel>
+                    </AppTabPanels>
+                  </div>
                 </form>
               </AppTabs>
             </div>

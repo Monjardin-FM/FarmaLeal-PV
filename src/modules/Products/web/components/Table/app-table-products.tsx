@@ -2,97 +2,119 @@ import React from "react";
 import {
   AppDataGrid,
   AppDataGridColumn,
+  RenderFnParams,
 } from "../../../../../presentation/Components/AppDataGrid";
+import { Products, items } from "../../../../../utils/exampleProducts";
+import { FcApproval } from "react-icons/fc";
+import { AppContainerBox } from "../../../../../presentation/Components/AppContainerBox";
 
-const items = [
-  { id: 0, product: "Producto 1" },
-  { id: 1, product: "Producto 2" },
-  { id: 2, product: "Producto 3" },
-  { id: 3, product: "Producto 4" },
-  { id: 4, product: "Producto 5" },
-  { id: 5, product: "Producto 6" },
-  { id: 6, product: "Producto 7" },
-  { id: 7, product: "Producto 7" },
-  { id: 8, product: "Producto 7" },
-  { id: 9, product: "Producto 7" },
-  { id: 10, product: "Producto 7" },
-  { id: 11, product: "Producto 7" },
-  { id: 12, product: "Producto 7" },
-  { id: 13, product: "Producto 7" },
-  { id: 0, product: "Producto 1" },
-  { id: 1, product: "Producto 2" },
-  { id: 2, product: "Producto 3" },
-  { id: 3, product: "Producto 4" },
-  { id: 4, product: "Producto 5" },
-  { id: 5, product: "Producto 6" },
-  { id: 6, product: "Producto 7" },
-  { id: 7, product: "Producto 7" },
-  { id: 8, product: "Producto 7" },
-  { id: 9, product: "Producto 7" },
-  { id: 10, product: "Producto 7" },
-  { id: 11, product: "Producto 7" },
-  { id: 12, product: "Producto 7" },
-  { id: 13, product: "Producto 7" },
-  { id: 0, product: "Producto 1" },
-  { id: 1, product: "Producto 2" },
-  { id: 2, product: "Producto 3" },
-  { id: 3, product: "Producto 4" },
-  { id: 4, product: "Producto 5" },
-  { id: 5, product: "Producto 6" },
-  { id: 6, product: "Producto 7" },
-  { id: 7, product: "Producto 7" },
-  { id: 8, product: "Producto 7" },
-  { id: 9, product: "Producto 7" },
-  { id: 10, product: "Producto 7" },
-  { id: 11, product: "Producto 7" },
-  { id: 12, product: "Producto 7" },
-  { id: 13, product: "Producto 7" },
-];
-
-const NameProductColumn = () => {
-  return <div className="flex items-center space-x-3">Clave/Descripción</div>;
+export type TableProductsProps = {
+  openModal: () => void;
 };
 
-const DescripcionProductColumn = () => {
-  return <div className="flex items-center space-x-3">Existencia</div>;
+const QuantityProductColumn = ({
+  record,
+  openModal,
+}: RenderFnParams<Products> & TableProductsProps) => {
+  return (
+    <div className="flex items-center space-x-3">
+      <button
+        onClick={() => {
+          openModal();
+        }}
+        className="bg-white bg-opacity-20 rounded-full w-8 h-8"
+      >
+        {1}
+      </button>
+    </div>
+  );
 };
 
-const Column1 = () => {
-  return <div className="flex items-center space-x-3">Precio</div>;
+const DescripcionProductColumn = (params: RenderFnParams<Products>) => {
+  return (
+    <div className="flex items-center space-x-3">
+      {params.record.descripcion}
+    </div>
+  );
+};
+const RecetaColumn = (params: RenderFnParams<Products>) => {
+  return (
+    <div>
+      {params.record.receta && (
+        <div>
+          <FcApproval size={20} />
+        </div>
+      )}
+    </div>
+  );
 };
 
-const actions = () => {
-  return <div>Acciones</div>;
+const Existencia = (params: RenderFnParams<Products>) => {
+  return <div>{params.record.existencia}</div>;
 };
 
-export const AppTableProducts = () => {
-  const columns: AppDataGridColumn<any>[] = [
+const PrecioUColumn = (params: RenderFnParams<Products>) => {
+  return <div>{params.record.precioUnitario}</div>;
+};
+
+const ImporteColumn = (params: RenderFnParams<Products>) => {
+  return <div>{params.record.precioUnitario}</div>;
+};
+
+export const AppTableProducts = ({ openModal }: TableProductsProps) => {
+  const columns: AppDataGridColumn<Products>[] = [
     {
-      key: "key",
-      dataIndex: "ProductName",
-      title: "Clave/Descripción",
-      render: NameProductColumn,
+      key: "quantity",
+      dataIndex: "QuantityColumn",
+      title: "Cantidad",
+      render: (data) =>
+        QuantityProductColumn({
+          ...data,
+          openModal: () => {
+            openModal();
+          },
+        }),
     },
     {
-      key: "inventary",
-      dataIndex: "inventary",
-      title: "Exitencia",
+      key: "description",
+      dataIndex: "description",
+      title: "Descripcion",
       render: DescripcionProductColumn,
     },
     {
-      key: "price",
-      dataIndex: "price",
-      title: "Precio",
-      render: Column1,
+      key: "receta",
+      dataIndex: "receta",
+      title: "Receta",
+      render: RecetaColumn,
     },
-
     {
-      key: "actionsProduct",
-      dataIndex: "actionsProduct",
-      title: "Acciones",
-      render: actions,
+      key: "existencia",
+      dataIndex: "existencia",
+      title: "Existencia",
+      render: Existencia,
+    },
+    {
+      key: "precio",
+      dataIndex: "precio",
+      title: "PrecioUnitario",
+      render: PrecioUColumn,
+    },
+    {
+      key: "importe",
+      dataIndex: "importe",
+      title: "Importe",
+      render: ImporteColumn,
     },
   ];
 
-  return <AppDataGrid<any> columns={columns} itemKey="id" dataSource={items} />;
+  return (
+    <>
+      <div className=" mt-4 flex justify-center items-start col-start-2 col-span-10 row-span-4 overflow-y-auto overflow-x-auto">
+        <AppContainerBox className="">
+          <AppDataGrid columns={columns} itemKey="id" dataSource={items} />
+        </AppContainerBox>
+      </div>
+      ;
+    </>
+  );
 };

@@ -5,7 +5,7 @@ export interface AppModalOverlayProps {
 }
 
 export const AppModalOverlay = ({ children }: AppModalOverlayProps) => (
-  <div className="w-full min-h-screen bg-black bg-opacity-60">
-    <div className="container mx-auto  pt-5 py-16">{children}</div>
+  <div className="w-full min-h-screen bg-black bg-opacity-75 flex justify-center items-center">
+    <div className="container mx-auto">{children}</div>
   </div>
 );
