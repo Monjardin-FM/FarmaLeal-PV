@@ -17,6 +17,24 @@ export const cartProductsSlice = createSlice({
     addItem: (state, { payload }: PayloadAction<{ item: ProductCartItem }>) => {
       state.cart = [...state.cart, payload.item];
     },
+    removeItem: (state, { payload }: PayloadAction<{ index: number }>) => {
+      state.cart = [...state.cart].filter(
+        (_, index) => index !== payload.index
+      );
+    },
+    updateItem: (
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        index: number;
+        changes: Omit<ProductCartItem, "productId">;
+      }>
+    ) => {
+      state.cart = [...state.cart].map((item, index) =>
+        index === payload.index ? { ...item, ...payload.changes } : item
+      );
+    },
     updateQuantity: (
       state,
       { payload }: PayloadAction<{ index: number; quantity: number }>
@@ -30,5 +48,6 @@ export const cartProductsSlice = createSlice({
   },
 });
 
-export const { addItem, updateQuantity } = cartProductsSlice.actions;
+export const { addItem, updateQuantity, removeItem, updateItem } =
+  cartProductsSlice.actions;
 export const { reducer: cartProductsReducer } = cartProductsSlice;

@@ -7,17 +7,21 @@ import {
   AppModalHeader,
   AppModalOverlay,
 } from "../../../../../presentation/Components/AppModal";
-import { ProductPrueba } from "../../../../Products/domain/entities/productprueba";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { ResultSearchTableModal } from "../tables/result-search-table-modal";
 import { TableSkeleton } from "../../../../../presentation/Components/TableSkeleton";
 import { DataNotFound } from "../../../../../presentation/Components/AppDataNotFound";
+import { SellsSearchProduct } from "../sells-search-input";
+import { ProductPrueba } from "../../../../Products/domain/entities/productprueba";
 
 type ProductsResultSearchModalProps = {
   isVisible: boolean;
   onClose: () => void;
   items?: ProductPrueba[] | undefined;
   loadingProducts: boolean;
+  onSearch: (search: string) => void;
+  search: string;
+  setSearch: (search: string) => void;
 };
 
 export const ProductsResultSearchModal = ({
@@ -25,6 +29,9 @@ export const ProductsResultSearchModal = ({
   onClose,
   items,
   loadingProducts,
+  onSearch,
+  search,
+  setSearch,
 }: ProductsResultSearchModalProps) => {
   const [parent] = useAutoAnimate({ duration: 300 });
 
@@ -37,11 +44,21 @@ export const ProductsResultSearchModal = ({
           </AppModalHeader>
           <AppModalCloseButton />
           <AppModalBody>
-            <div ref={parent} className="h-96 overflow-y-auto w-full">
+            <div
+              ref={parent}
+              className="h-96 overflow-y-auto w-full flex flex-col gap-y-3"
+            >
+              <div>
+                <SellsSearchProduct
+                  onSearch={onSearch}
+                  search={search}
+                  setSearch={setSearch}
+                />
+              </div>
               {loadingProducts ? (
                 <TableSkeleton />
               ) : (
-                <div>
+                <div ref={parent}>
                   {items?.length === undefined || items?.length === 0 ? (
                     <div className="flex flex-row justify-center items-center">
                       <div className="max-w-xl">
@@ -49,7 +66,9 @@ export const ProductsResultSearchModal = ({
                       </div>
                     </div>
                   ) : (
-                    <ResultSearchTableModal items={items} />
+                    <div>
+                      <ResultSearchTableModal items={items} />
+                    </div>
                   )}
                 </div>
               )}

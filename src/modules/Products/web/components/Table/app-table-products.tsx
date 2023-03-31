@@ -4,65 +4,75 @@ import {
   AppDataGridColumn,
   RenderFnParams,
 } from "../../../../../presentation/Components/AppDataGrid";
-import { Products, items } from "../../../../../utils/exampleProducts";
-import { FcApproval } from "react-icons/fc";
 import { AppContainerBox } from "../../../../../presentation/Components/AppContainerBox";
+import { ProductCartItem } from "../../../../Sells/domain/entities/product-cart-item";
+import { useSellsProducts } from "../../../../Sells/web/hooks/useSellsProducts";
+
+import { AppRemoveItemButton } from "./app-remove-item-button";
+import { AppButton } from "../../../../../presentation/Components/AppButton";
+import { Chip } from "@mui/material";
+import { BsEye } from "react-icons/bs";
 
 export type TableProductsProps = {
   openModal: () => void;
+  setQuantityProduct: (quantity: number) => void;
+  setIndexProduct: (indexProduct: number) => void;
 };
 
-const QuantityProductColumn = ({
-  record,
-  openModal,
-}: RenderFnParams<Products> & TableProductsProps) => {
+const QuantityProductColumn = (
+  params: RenderFnParams<ProductCartItem> & TableProductsProps
+) => {
   return (
     <div className="flex items-center space-x-3">
-      <button
+      <AppButton
         onClick={() => {
-          openModal();
+          params.setIndexProduct(params.index);
+          params.setQuantityProduct(params.record.quantity);
+          params.openModal();
         }}
-        className="bg-white bg-opacity-20 rounded-full w-8 h-8"
+        className=""
+        size="sm"
+        variant="ghost"
       >
-        {1}
-      </button>
+        {params.record.quantity}
+      </AppButton>
     </div>
   );
 };
 
-const DescripcionProductColumn = (params: RenderFnParams<Products>) => {
+const DescripcionProductColumn = (params: RenderFnParams<ProductCartItem>) => {
   return (
-    <div className="flex items-center space-x-3">
-      {params.record.descripcion}
+    <div className="flex justify-start flex-col">
+      <div className="text-base">{params.record.substance}</div>
+      <div className="text-gray-500 text-xs">{params.record.name}</div>
     </div>
   );
 };
-const RecetaColumn = (params: RenderFnParams<Products>) => {
+const EANProductColumn = (params: RenderFnParams<ProductCartItem>) => {
   return (
-    <div>
-      {params.record.receta && (
-        <div>
-          <FcApproval size={20} />
-        </div>
-      )}
+    <div className="flex justify-start flex-col">
+      <Chip color="info" className="text-sm" label={params.record.ean} />
     </div>
   );
 };
 
-const Existencia = (params: RenderFnParams<Products>) => {
-  return <div>{params.record.existencia}</div>;
+const ActionColumn = (params: RenderFnParams<ProductCartItem>) => {
+  return (
+    <div className="flex flex-row gap-x-2 justify-start items-center">
+      <AppButton colorScheme="gray" variant="ghost" size="sm">
+        <BsEye size={20} />
+      </AppButton>
+      <AppRemoveItemButton idItem={params.index} />
+    </div>
+  );
 };
 
-const PrecioUColumn = (params: RenderFnParams<Products>) => {
-  return <div>{params.record.precioUnitario}</div>;
-};
-
-const ImporteColumn = (params: RenderFnParams<Products>) => {
-  return <div>{params.record.precioUnitario}</div>;
-};
-
-export const AppTableProducts = ({ openModal }: TableProductsProps) => {
-  const columns: AppDataGridColumn<Products>[] = [
+export const AppTableProducts = ({
+  openModal,
+  setQuantityProduct,
+  setIndexProduct,
+}: TableProductsProps) => {
+  const columns: AppDataGridColumn<ProductCartItem>[] = [
     {
       key: "quantity",
       dataIndex: "QuantityColumn",
@@ -70,6 +80,12 @@ export const AppTableProducts = ({ openModal }: TableProductsProps) => {
       render: (data) =>
         QuantityProductColumn({
           ...data,
+          setQuantityProduct: () => {
+            setQuantityProduct(data.record.quantity);
+          },
+          setIndexProduct: () => {
+            setIndexProduct(data.index);
+          },
           openModal: () => {
             openModal();
           },
@@ -82,36 +98,26 @@ export const AppTableProducts = ({ openModal }: TableProductsProps) => {
       render: DescripcionProductColumn,
     },
     {
-      key: "receta",
-      dataIndex: "receta",
-      title: "Receta",
-      render: RecetaColumn,
+      key: "EAN",
+      dataIndex: "EAN",
+      title: "EAN",
+      render: EANProductColumn,
     },
+
     {
-      key: "existencia",
-      dataIndex: "existencia",
-      title: "Existencia",
-      render: Existencia,
-    },
-    {
-      key: "precio",
-      dataIndex: "precio",
-      title: "PrecioUnitario",
-      render: PrecioUColumn,
-    },
-    {
-      key: "importe",
-      dataIndex: "importe",
-      title: "Importe",
-      render: ImporteColumn,
+      key: "actions",
+      dataIndex: "actions",
+      title: "Acciones",
+      render: ActionColumn,
     },
   ];
 
+  const { cart } = useSellsProducts();
   return (
     <>
       <div className=" mt-4 flex justify-center items-start col-start-2 col-span-10 row-span-4 overflow-y-auto overflow-x-auto">
         <AppContainerBox className="">
-          <AppDataGrid columns={columns} itemKey="id" dataSource={items} />
+          <AppDataGrid columns={columns} itemKey="id" dataSource={cart} />
         </AppContainerBox>
       </div>
       ;

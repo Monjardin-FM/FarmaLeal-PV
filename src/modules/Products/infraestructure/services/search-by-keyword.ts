@@ -20,7 +20,7 @@ export const SearchByKeyword: ProductRepository["searchByKeyword"] = async ({
   const data = body.data as any[];
 
   const products = data.map<ProductPrueba>((product) => ({
-    id: product.id,
+    idProducto: product.idProducto,
     ean: product.ean,
     claveSAT: product.claveSAT,
     name: product.descripcion,

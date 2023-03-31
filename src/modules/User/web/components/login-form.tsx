@@ -7,6 +7,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { Formik, Form } from "formik";
 import { AppButton } from "../../../../presentation/Components/AppButton";
 import { useUser } from "../hooks/use-user";
+import { AppToast } from "../../../../presentation/Components/AppToastNotification";
 
 export type LoginFormValue = {
   email: string;
@@ -27,7 +28,11 @@ export const LoginForm = () => {
 
   useEffect(() => {
     if (error) {
-      console.log("Error al enviar");
+      AppToast().fire({
+        icon: "error",
+        title: "Error al iniciar sesión",
+        text: "Credenciales incorrectas",
+      });
     }
   });
   return (

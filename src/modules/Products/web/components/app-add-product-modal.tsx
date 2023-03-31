@@ -125,8 +125,6 @@ export const AppAddProductModal = ({
       precioCompra: Yup.number().required("Campo Obligatorio"),
     }),
     onSubmit: (values, { resetForm }) => {
-      console.log(`Enviando Formulario: ${values.clave}`);
-      console.log(values);
       resetForm();
       setTags([]);
       setFile(undefined);

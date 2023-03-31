@@ -1,5 +1,5 @@
 export type ProductPrueba = {
-  id: number;
+  idProducto: number;
   name: string;
   ean: string;
   claveSAT: string;

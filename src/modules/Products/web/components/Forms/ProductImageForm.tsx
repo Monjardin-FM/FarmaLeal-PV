@@ -40,7 +40,6 @@ export const ProductImageForm = ({
     onUpload(file);
   };
   const handleError = () => {
-    console.log("El tipo de archivo debe de ser una imagen");
     AppToast().fire({
       icon: "error",
       title: "Tipo de Archivo no admitido",

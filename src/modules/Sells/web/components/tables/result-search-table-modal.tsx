@@ -4,12 +4,14 @@ import {
   AppDataGridColumn,
   RenderFnParams,
 } from "../../../../../presentation/Components/AppDataGrid";
-import { ProductPrueba } from "../../../../Products/domain/entities/productprueba";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Chip } from "@mui/material";
 import { FiPlus } from "react-icons/fi";
 import { AppButton } from "../../../../../presentation/Components/AppButton";
-import { AppTooltip } from "../../../../../presentation/Components/AppTooltip";
+import { useSellsProducts } from "../../hooks/useSellsProducts";
+import { AppToast } from "../../../../../presentation/Components/AppToastNotification";
+import { ProductPrueba } from "../../../../Products/domain/entities/productprueba";
+// import { AppTooltip } from "../../../../../presentation/Components/AppTooltip";
 export type ResultSearchTableModalProps = {
   items?: ProductPrueba[];
 };
@@ -35,16 +37,33 @@ const EANColumn = (params: RenderFnParams<ProductPrueba>) => {
 const ExistenciaColumn = (params: RenderFnParams<ProductPrueba>) => {
   return (
     <div>
-      {params.record.cantidad === 0 ? (
-        <Chip variant="filled" color="error" label={params.record.cantidad} />
-      ) : (
-        <Chip variant="filled" color="success" label={params.record.cantidad} />
-      )}
+      <Chip
+        variant="filled"
+        color={params.record.cantidad === 0 ? "error" : "success"}
+        label={params.record.cantidad}
+      />
     </div>
   );
 };
 
 const ActionColumn = (params: RenderFnParams<ProductPrueba>) => {
+  const { addItem: addItemSell } = useSellsProducts();
+  const onAddItem = () => {
+    addItemSell({
+      item: {
+        productId: params.record.idProducto,
+        quantity: 1,
+        ean: params.record.ean,
+        name: params.record.name,
+        substance: params.record.substance,
+        unitPrice: 10,
+      },
+    });
+    AppToast().fire({
+      icon: "success",
+      title: "Producto agregado",
+    });
+  };
   return (
     <div>
       <AppButton
@@ -53,6 +72,8 @@ const ActionColumn = (params: RenderFnParams<ProductPrueba>) => {
         variant="ghost"
         className="rounded-full"
         colorScheme="gray"
+        onClick={onAddItem}
+        isDisabled={params.record.cantidad === 0}
       >
         <FiPlus size={20} />
       </AppButton>
@@ -90,7 +111,7 @@ export const ResultSearchTableModal = ({
     },
   ];
   return (
-    <div ref={parent} className="flex justify-center items-center">
+    <div ref={parent} className="flex justify-center items-center w-full">
       <AppDataGrid columns={columns} itemKey="id" dataSource={items} />
     </div>
   );
