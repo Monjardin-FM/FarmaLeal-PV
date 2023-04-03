@@ -7,25 +7,28 @@ import { SellsTotalViewer } from "./sells-total-viewer";
 import { useSearchProducts } from "../../../Products/web/hooks/use-get-many-products";
 import { ProductsResultSearchModal } from "./modals/ProductsResultSearchModal";
 import { useSellsProducts } from "../hooks/useSellsProducts";
+import { CloseSellModal } from "./modals/CloseSellModal";
 
 export const SellsManagerPage = () => {
   const { cart } = useSellsProducts();
   const [indexProduct, setIndexProduct] = useState(0);
-  const [totalSell, setTotalSell] = useState<number>(699.99);
+  const [totalSell, setTotalSell] = useState<number>(2500.99);
   const [toggleQuantityModal, setToggleQuantityModal] = useState(false);
   const [toggleResultSearchModal, setToggleResultSearchModal] = useState(false);
+  const [toggleCloseSellModal, setToggleCloseSellModal] = useState(false);
   const [cartItem, setCartItem] = useState(cart[indexProduct]);
   const [quantityProduct, setQuantityProduct] = useState(
     cart[indexProduct]?.quantity ?? 1
   );
-  console.log(setTotalSell);
   const {
     getProducts,
     products,
     loading: loadingProducts,
   } = useSearchProducts();
-  const handleOpenModal = () => {
-    setToggleQuantityModal(true);
+  const handleOpenModal = (nameModal: string) => {
+    nameModal === "search" && setToggleResultSearchModal(true);
+    nameModal === "quantity" && setToggleQuantityModal(true);
+    nameModal === "Sell" && setToggleCloseSellModal(true);
   };
   const [search, setSearch] = useState("");
   const onSearch = (search: string) => {
@@ -33,12 +36,20 @@ export const SellsManagerPage = () => {
     setToggleResultSearchModal(true);
   };
   useEffect(() => {
-    console.log(cart);
-    console.log(indexProduct);
     setCartItem(cart[indexProduct]);
-    console.log(cartItem);
   }, [indexProduct, cart, cartItem]);
 
+  useEffect(() => {
+    if (cart.length > 0) {
+      const total = cart.map((item) => item.quantity * item.unitPrice);
+      const totalAmount = total.reduce(
+        (acumulator, current) => acumulator + current
+      );
+      setTotalSell(totalAmount);
+    } else {
+      setTotalSell(0);
+    }
+  }, [cart]);
   return (
     <>
       <QuantityModal
@@ -56,6 +67,11 @@ export const SellsManagerPage = () => {
         onSearch={onSearch}
         search={search}
         setSearch={setSearch}
+      />
+      <CloseSellModal
+        isVisible={toggleCloseSellModal}
+        onClose={() => setToggleCloseSellModal(false)}
+        totalSell={totalSell}
       />
       <SellsNavbarActions openModal={handleOpenModal} />
       <section className="flex flex-row justify-center h-screen w-screen p-1">

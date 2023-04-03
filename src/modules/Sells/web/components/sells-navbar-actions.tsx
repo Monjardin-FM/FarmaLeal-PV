@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Register from "../../../../assets/img/icons8-register-64.png";
 import Search from "../../../../assets/img/icons8-search-47.png";
 import Quantity from "../../../../assets/img/icons8-boxes-64.png";
+import Sell from "../../../../assets/img/shopping-bag.png";
 import { motion } from "framer-motion";
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from "react-icons/ai";
 import { AppContainerBox } from "../../../../presentation/Components/AppContainerBox";
 
 export type SellsNavbarActionsProps = {
-  openModal: () => void;
+  openModal: (nameModal: string) => void;
 };
 
 export const SellsNavbarActions = ({ openModal }: SellsNavbarActionsProps) => {
@@ -34,7 +35,7 @@ export const SellsNavbarActions = ({ openModal }: SellsNavbarActionsProps) => {
       <div>
         <AppContainerBox className=" items-center p-2 ">
           <div className="flex flex-col justify-start gap-y-2">
-            <button onClick={() => openModal()}>
+            <button onClick={() => openModal("search")}>
               <div className="flex flex-col justify-center items-center gap-y-2 px-2 py-1 w-16 rounded-xl hover:bg-white hover:bg-opacity-25 hover:rounded-xl transition duration-200 hover:cursor-pointer">
                 <img src={Search} alt="" width={30} />
                 <span className="text-sm">Buscar</span>
@@ -44,10 +45,10 @@ export const SellsNavbarActions = ({ openModal }: SellsNavbarActionsProps) => {
               <img src={Register} alt="" width={30} />
               <span className="text-sm">Cajón</span>
             </div>
-            <button onClick={() => openModal()}>
+            <button onClick={() => openModal("Sell")}>
               <div className="flex flex-col justify-center items-center gap-y-2 px-2 py-1 w-16 rounded-xl hover:bg-white hover:bg-opacity-25 hover:rounded-xl transition duration-200 hover:cursor-pointer">
-                <img src={Quantity} alt="" width={30} />
-                <span className="text-sm">Cantidad</span>
+                <img src={Sell} alt="" width={30} />
+                <span className="text-sm">Cerrar Venta</span>
               </div>
             </button>
           </div>

@@ -14,7 +14,7 @@ import { Chip } from "@mui/material";
 import { BsEye } from "react-icons/bs";
 
 export type TableProductsProps = {
-  openModal: () => void;
+  openModal: (nameModal: string) => void;
   setQuantityProduct: (quantity: number) => void;
   setIndexProduct: (indexProduct: number) => void;
 };
@@ -28,7 +28,7 @@ const QuantityProductColumn = (
         onClick={() => {
           params.setIndexProduct(params.index);
           params.setQuantityProduct(params.record.quantity);
-          params.openModal();
+          params.openModal("quantity");
         }}
         className=""
         size="sm"
@@ -87,7 +87,7 @@ export const AppTableProducts = ({
             setIndexProduct(data.index);
           },
           openModal: () => {
-            openModal();
+            openModal("quantity");
           },
         }),
     },

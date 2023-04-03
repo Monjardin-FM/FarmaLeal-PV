@@ -1,7 +1,7 @@
 export type ProductCartItem = {
   productId: number;
   quantity: number;
-  unitPrice?: number;
+  unitPrice: number;
   amount?: number;
   ean: string;
   substance: string;
