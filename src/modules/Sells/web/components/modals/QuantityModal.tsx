@@ -5,7 +5,6 @@ import {
   AppModalContent,
   AppModalOverlay,
 } from "../../../../../presentation/Components/AppModal";
-import { BiChevronLeftCircle, BiChevronRightCircle } from "react-icons/bi";
 import { AppButton } from "../../../../../presentation/Components/AppButton";
 import { AppContainerBox } from "../../../../../presentation/Components/AppContainerBox";
 import Ok from "../../../../../assets/img/ok.png";
@@ -17,6 +16,8 @@ import {
   AiOutlineArrowDown,
   AiOutlineArrowUp,
   AiOutlineEnter,
+  AiOutlineMinusCircle,
+  AiOutlinePlusCircle,
 } from "react-icons/ai";
 type QuantityModalProps = {
   isVisible: boolean;
@@ -99,16 +100,16 @@ export const QuantityModal = ({
                       colorScheme="gray"
                       onClick={decrement}
                     >
-                      <BiChevronLeftCircle size={45} />
+                      <AiOutlineMinusCircle size={45} />
                     </AppButton>
                     <div className="text-4xl font-bold">{quantity}</div>
                     <AppButton
                       variant="link"
                       size="base"
-                      colorScheme="gray"
+                      colorScheme="success"
                       onClick={increment}
                     >
-                      <BiChevronRightCircle size={45} />
+                      <AiOutlinePlusCircle size={45} />
                     </AppButton>
                   </div>
                   <div className="w-14">

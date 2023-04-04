@@ -56,7 +56,9 @@ const ActionColumn = (params: RenderFnParams<ProductPrueba>) => {
         ean: params.record.ean,
         name: params.record.name,
         substance: params.record.substance,
-        unitPrice: 10,
+        existence: params.record.cantidad,
+        // unitPrice: 10,
+        unitPrice: Math.floor(Math.random() * 100) + 10,
       },
     });
     AppToast().fire({

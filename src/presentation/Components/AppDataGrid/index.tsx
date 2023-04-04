@@ -87,7 +87,7 @@ export function AppDataGrid<T>({
         {dataSource.map((item, index) => (
           <AppTr
             key={(item as any)[itemKey]}
-            className="hover:bg-primary-500 hover:shadow-lg transition 
+            className="hover:bg-primary-600 hover:shadow-lg transition 
             ease-out duration-200 "
           >
             {rowSelection && (

@@ -38,7 +38,7 @@ export const UserInformation = ({ signOut, user }: UserInformationProps) => {
       animate={visible ? "visible" : "hidden"}
       variants={variantsUserInformation}
       exit="hidden"
-      className="z-10 absolute w-48 top-1 right-0.5 flex flex-row justify-center items-center  backdrop-filter  bg-clip-padding backdrop-blur-sm "
+      className="z-10 absolute w-fit top-1 right-1 flex flex-row justify-center items-center  backdrop-filter  bg-clip-padding backdrop-blur-sm "
     >
       <div
         className={
@@ -48,7 +48,7 @@ export const UserInformation = ({ signOut, user }: UserInformationProps) => {
           onHideUserInformation();
         }}
       >
-        <div className="absolute top-1/2 text-white text-opacity-70 left-0">
+        <div className="absolute top-1/2 text-white text-opacity-70">
           {visible ? (
             <AiOutlineCaretRight size={15} />
           ) : (
@@ -68,7 +68,7 @@ export const UserInformation = ({ signOut, user }: UserInformationProps) => {
               Cliente:{" "}
               <span className="font-semibold text-white">{` ${convenio?.descripcion}`}</span>
             </div>
-            <div className="text-gray-400 w-fit ">
+            <div className="text-gray-400 w-40">
               Sucursal:{" "}
               <span className="font-semibold text-white">{` ${mandato?.descripcion}`}</span>
             </div>

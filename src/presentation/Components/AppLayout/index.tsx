@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useToggle } from "react-use";
 import useClickAway from "react-use/lib/useClickAway";
 import { CiGrid41 } from "react-icons/ci";

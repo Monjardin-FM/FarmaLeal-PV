@@ -51,7 +51,7 @@ export const SellsManagerPage = () => {
     }
   }, [cart]);
   return (
-    <>
+    <div className="h-screen">
       <QuantityModal
         isVisible={toggleQuantityModal}
         onClose={() => setToggleQuantityModal(false)}
@@ -74,8 +74,8 @@ export const SellsManagerPage = () => {
         totalSell={totalSell}
       />
       <SellsNavbarActions openModal={handleOpenModal} />
-      <section className="flex flex-row justify-center h-screen w-screen p-1">
-        <div className="z-0 w-full grid grid-cols-12 grid-rows-6  gap-2 ">
+      <section className="flex flex-row justify-center h-screen w-screen">
+        <div className="w-full grid grid-cols-12 grid-rows-6  gap-2 ">
           <SellsHeadPage
             onSearch={onSearch}
             search={search}
@@ -89,6 +89,6 @@ export const SellsManagerPage = () => {
           <SellsTotalViewer totalSell={totalSell} />
         </div>
       </section>
-    </>
+    </div>
   );
 };

@@ -35,7 +35,7 @@ export const Menu = ({ isVisible, onClose }: MenuProps) => {
             <div className="grid grid-cols-12 gap-5 items-center justify-center">
               <MenuItemLink
                 lottie={Sells}
-                label="Ventas"
+                label="Realizar Venta"
                 to="/ventas"
                 onClose={() => onClose()}
               />

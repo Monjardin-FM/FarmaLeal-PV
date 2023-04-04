@@ -29,6 +29,7 @@ export const LoginForm = () => {
   useEffect(() => {
     if (error) {
       AppToast().fire({
+        position: "bottom",
         icon: "error",
         title: "Error al iniciar sesión",
         text: "Credenciales incorrectas",

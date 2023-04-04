@@ -7,6 +7,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { AppButton } from "../../../presentation/Components/AppButton";
 import * as Yup from "yup";
 import { AppErrorForm } from "../../../presentation/Components/AppErrorForm";
+import { AppToast } from "../../../presentation/Components/AppToastNotification";
 
 export type ChangePasswordFormValues = {
   newPassword: string;
@@ -25,7 +26,13 @@ export const ChangePasswordForm = () => {
       .required("Campo Obligatorio"),
   });
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    AppToast().fire({
+      title: "Éxito",
+      text: "La contraseña se cambió con éxito",
+      icon: "success",
+    });
+  };
 
   return (
     <Formik
@@ -72,7 +79,7 @@ export const ChangePasswordForm = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {touched.confirmedPassword && errors.confirmedPassword && (
+              {touched.confirmedPassword && errors.confirmedPassword ? (
                 <AppErrorForm
                   errorName={errors.confirmedPassword}
                   errorFlag={
@@ -81,6 +88,17 @@ export const ChangePasswordForm = () => {
                       : false
                   }
                 />
+              ) : values.confirmedPassword !== values.newPassword ? (
+                <AppErrorForm
+                  errorName={"Las contraseñas no coinciden"}
+                  errorFlag={
+                    values.newPassword !== values.confirmedPassword
+                      ? true
+                      : false
+                  }
+                />
+              ) : (
+                ""
               )}
             </AppFormField>
             <AppButton

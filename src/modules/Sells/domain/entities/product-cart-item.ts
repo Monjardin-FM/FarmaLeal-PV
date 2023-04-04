@@ -6,4 +6,5 @@ export type ProductCartItem = {
   ean: string;
   substance: string;
   name: string;
+  existence: number;
 };

@@ -23,14 +23,14 @@ const QuantityProductColumn = (
   params: RenderFnParams<ProductCartItem> & TableProductsProps
 ) => {
   return (
-    <div className="flex items-center space-x-3">
+    <div className="flex flex-row items-center justify-start space-x-3">
       <AppButton
         onClick={() => {
           params.setIndexProduct(params.index);
           params.setQuantityProduct(params.record.quantity);
           params.openModal("quantity");
         }}
-        className=""
+        className="rounded-full"
         size="sm"
         variant="ghost"
       >
@@ -42,7 +42,7 @@ const QuantityProductColumn = (
 
 const DescripcionProductColumn = (params: RenderFnParams<ProductCartItem>) => {
   return (
-    <div className="flex justify-start flex-col">
+    <div className="flex items-start flex-col">
       <div className="text-base">{params.record.substance}</div>
       <div className="text-gray-500 text-xs">{params.record.name}</div>
     </div>
@@ -50,8 +50,22 @@ const DescripcionProductColumn = (params: RenderFnParams<ProductCartItem>) => {
 };
 const EANProductColumn = (params: RenderFnParams<ProductCartItem>) => {
   return (
-    <div className="flex justify-start flex-col">
+    <div className="flex justify-start flex-row">
       <Chip color="info" className="text-sm" label={params.record.ean} />
+    </div>
+  );
+};
+
+const ExistenceColumn = (params: RenderFnParams<ProductCartItem>) => {
+  return (
+    <div className="flex flex-row justify-start">{params.record.existence}</div>
+  );
+};
+
+const UnitPriceColumn = (params: RenderFnParams<ProductCartItem>) => {
+  return (
+    <div className="flex justify-center flex-col">
+      {`$${params.record.unitPrice}`}
     </div>
   );
 };
@@ -63,6 +77,18 @@ const ActionColumn = (params: RenderFnParams<ProductCartItem>) => {
         <BsEye size={20} />
       </AppButton>
       <AppRemoveItemButton idItem={params.index} />
+    </div>
+  );
+};
+const TotalPriceColumn = (params: RenderFnParams<ProductCartItem>) => {
+  return (
+    <div className="flex flex-row justify-start">
+      {/* {`$${params.record.unitPrice * params.record.quantity}`} */}
+      <Chip
+        color="warning"
+        className="text-sm"
+        label={`$${params.record.unitPrice * params.record.quantity}`}
+      />
     </div>
   );
 };
@@ -103,7 +129,24 @@ export const AppTableProducts = ({
       title: "EAN",
       render: EANProductColumn,
     },
-
+    {
+      key: "Existence",
+      dataIndex: "Existence",
+      title: "Existencia",
+      render: ExistenceColumn,
+    },
+    {
+      key: "UnitPrice",
+      dataIndex: "UnitPrice",
+      title: "Precio Unitario",
+      render: UnitPriceColumn,
+    },
+    {
+      key: "Amount",
+      dataIndex: "Amount",
+      title: "Importe",
+      render: TotalPriceColumn,
+    },
     {
       key: "actions",
       dataIndex: "actions",
