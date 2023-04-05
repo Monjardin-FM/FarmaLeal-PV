@@ -43,7 +43,7 @@ export const SellsHeadPage = ({
                   <div className="flex flex-row items-center justify-center gap-3">
                     <AppFormLabel>
                       <div className="w-7">
-                        <img src={Client} alt="clinet" />
+                        <img src={Client} alt="client" />
                       </div>
                     </AppFormLabel>
                     <AppTextField />

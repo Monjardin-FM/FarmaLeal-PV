@@ -1,32 +1,36 @@
-import DatePicker, {
-  ReactDatePickerProps,
-  registerLocale,
-} from "react-datepicker";
-import { AppInput, AppInputProps } from "../AppInput";
+import React from "react";
 import clsx from "clsx";
-import es from "date-fns/locale/es";
+import DatePicker from "react-date-picker";
+import { AppInputProps } from "../AppInput";
+import { AiOutlineCalendar } from "react-icons/ai";
 
-registerLocale("es", es);
-export type AppDatePickerProps = ReactDatePickerProps & AppInputProps;
+export type AppDatePickerProps = AppInputProps & {
+  onChange: (date: any) => void;
+  value: any;
+};
 
-const AppDatePicker = ({
+export const AppDatePicker = ({
   leftIcon,
   rightIcon,
   className,
-  required,
   colorSchema = "gray",
-  wrapperClassName,
+  onChange,
+  value,
   ...props
 }: AppDatePickerProps) => {
   return (
     <DatePicker
+      onChange={onChange}
+      value={value}
       locale="es"
-      dateFormat="dd/MM/yyyy"
-      className={clsx("form-input", className)}
-      wrapperClassName={clsx("w-full", wrapperClassName)}
+      className={clsx(
+        "h-11 w-full text-center bg-black bg-opacity-40 text-white",
+        className
+      )}
       {...props}
+      calendarIcon={<AiOutlineCalendar color="white" size={20} />}
+      calendarClassName="bg-white text-primary-800"
+      clearIcon={null as any}
     />
   );
 };
-
-export default AppInput(AppDatePicker);

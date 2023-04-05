@@ -7,7 +7,9 @@ import {
   appContextDefaultValue,
 } from "./utils/context/app.context";
 import { routes } from "./routes";
-import "./assets/css/react-datepicker.css";
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
+
 function App() {
   return (
     <Provider store={store}>
