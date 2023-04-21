@@ -3,7 +3,7 @@ import React from "react";
 
 export const TableSkeleton = () => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 w-full overflow-x-hidden overflow-y-hidden">
       <Skeleton
         variant="rounded"
         width={"100%"}

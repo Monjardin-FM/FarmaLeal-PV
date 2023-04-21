@@ -5,7 +5,6 @@ import { CiGrid41 } from "react-icons/ci";
 import { Menu } from "../AppMenu/menu";
 import { Navigate, Outlet } from "react-router-dom";
 import { useUser } from "../../../modules/User/web/hooks/use-user";
-
 import "../../../assets/css/background.css";
 import { UserInformation } from "./UserInformation";
 
@@ -15,16 +14,13 @@ export const AppLayout = () => {
   const { user, signOut } = useUser();
 
   useClickAway(ref, () => toggle(false));
-
   return (
     <>
       {!user ? (
         <Navigate to={"/sign"} />
       ) : (
         <div className="w-full min-h-screen bg-animated overflow-hidden absolute">
-          <div className=" w-full  min-h-screen">
-            <Outlet />
-          </div>
+          <Outlet />
           <button
             onClick={() => toggle(true)}
             style={{ left: 16, top: 16 }}

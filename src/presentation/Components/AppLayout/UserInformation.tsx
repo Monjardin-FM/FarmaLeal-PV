@@ -38,7 +38,7 @@ export const UserInformation = ({ signOut, user }: UserInformationProps) => {
       animate={visible ? "visible" : "hidden"}
       variants={variantsUserInformation}
       exit="hidden"
-      className="z-10 absolute w-fit top-1 right-1 flex flex-row justify-center items-center  backdrop-filter  bg-clip-padding backdrop-blur-sm "
+      className="absolute w-fit top-1 right-1 flex flex-row justify-center items-center  backdrop-filter  bg-clip-padding backdrop-blur-sm "
     >
       <div
         className={

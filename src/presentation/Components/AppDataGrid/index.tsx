@@ -57,71 +57,73 @@ export function AppDataGrid<T>({
       : [];
 
   return (
-    <AppTable>
-      <AppThead className="top-0 sticky">
-        <AppTr>
-          {rowSelection && (
-            <AppTh align="center">
-              <AppCheckBox
-                checked={checkedAll}
-                onChange={(ev) => {
-                  setCheckedAll(!checkedAll);
-                  const keys = handleCheckAll(ev.target.checked);
-                  rowSelection.onChange(keys);
-                }}
-              />
-            </AppTh>
-          )}
-          {columns.map((column) => (
-            <AppTh
-              className={clsx("", column.className)}
-              align={column.align ? column.align : "left"}
-              key={column.key}
-            >
-              {column.title}
-            </AppTh>
-          ))}
-        </AppTr>
-      </AppThead>
-      <AppTbody>
-        {dataSource.map((item, index) => (
-          <AppTr
-            key={(item as any)[itemKey]}
-            className="hover:bg-primary-600 hover:shadow-lg transition 
-            ease-out duration-200 "
-          >
+    <div className="flex flex-col  border border-gray-50 border-opacity-20 text-gray-100 font-normal rounded-md  backdrop-blur-md">
+      <AppTable>
+        <AppThead className=" hover:bg-primary-700 transition duration-300 ">
+          <AppTr>
             {rowSelection && (
-              <AppTd align="center">
+              <AppTh align="center">
                 <AppCheckBox
-                  className="disabled:cursor-not-allowed"
-                  disabled={(item as any).disabled}
-                  checked={rowSelection.selectedRowKeys.some(
-                    (item) => item === index
-                  )}
-                  onChange={() => {
-                    const keys = handleCheckUnique(index);
+                  checked={checkedAll}
+                  onChange={(ev) => {
+                    setCheckedAll(!checkedAll);
+                    const keys = handleCheckAll(ev.target.checked);
                     rowSelection.onChange(keys);
                   }}
                 />
-              </AppTd>
+              </AppTh>
             )}
-            {columns.map(({ render, ...column }) => (
-              <AppTd
-                className={column.className}
+            {columns.map((column) => (
+              <AppTh
+                className={clsx("", column.className)}
                 align={column.align ? column.align : "left"}
                 key={column.key}
               >
-                {render
-                  ? render({
-                      record: item,
-                      index,
-                    })
-                  : column.dataIndex && (item as any)[column.dataIndex]}
-              </AppTd>
+                {column.title}
+              </AppTh>
             ))}
           </AppTr>
-        ))}
-      </AppTbody>
-    </AppTable>
+        </AppThead>
+        <AppTbody>
+          {dataSource.map((item, index) => (
+            <AppTr
+              key={(item as any)[itemKey]}
+              className="hover:bg-primary-600 hover:shadow-lg transition 
+            ease-out duration-200 "
+            >
+              {rowSelection && (
+                <AppTd align="center">
+                  <AppCheckBox
+                    className="disabled:cursor-not-allowed"
+                    disabled={(item as any).disabled}
+                    checked={rowSelection.selectedRowKeys.some(
+                      (item) => item === index
+                    )}
+                    onChange={() => {
+                      const keys = handleCheckUnique(index);
+                      rowSelection.onChange(keys);
+                    }}
+                  />
+                </AppTd>
+              )}
+              {columns.map(({ render, ...column }) => (
+                <AppTd
+                  className={column.className}
+                  align={column.align ? column.align : "left"}
+                  key={column.key}
+                >
+                  {render
+                    ? render({
+                        record: item,
+                        index,
+                      })
+                    : column.dataIndex && (item as any)[column.dataIndex]}
+                </AppTd>
+              ))}
+            </AppTr>
+          ))}
+        </AppTbody>
+      </AppTable>
+    </div>
   );
 }

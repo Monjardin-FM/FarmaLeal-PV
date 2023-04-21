@@ -163,7 +163,6 @@ export const AppTableProducts = ({
           <AppDataGrid columns={columns} itemKey="id" dataSource={cart} />
         </AppContainerBox>
       </div>
-      ;
     </>
   );
 };

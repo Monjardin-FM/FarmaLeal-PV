@@ -17,7 +17,7 @@ const AppTextField = ({
   return (
     <input
       type={type}
-      className={clsx("form-input text-sm", className)}
+      className={clsx("form-input text-sm md:text-xs", className)}
       onWheel={(event) => {
         if (onWheel) onWheel(event);
         else if (type === "number") event.currentTarget.blur();

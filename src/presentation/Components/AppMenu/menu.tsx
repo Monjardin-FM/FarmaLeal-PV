@@ -66,7 +66,7 @@ export const Menu = ({ isVisible, onClose }: MenuProps) => {
               <MenuItemLink
                 lottie={Invoice}
                 label="Facturación"
-                to=""
+                to="/invoice"
                 onClose={() => onClose()}
               />
               <MenuItemLink
@@ -78,7 +78,7 @@ export const Menu = ({ isVisible, onClose }: MenuProps) => {
               <MenuItemLink
                 lottie={Roles}
                 label="Asignación de roles"
-                to=""
+                to="/rolesadministrator"
                 onClose={() => onClose()}
               />
               <MenuItemLink

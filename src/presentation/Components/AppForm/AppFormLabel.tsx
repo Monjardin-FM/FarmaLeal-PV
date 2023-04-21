@@ -13,7 +13,7 @@ export const AppFormLabel = ({
     <label
       htmlFor={htmlFor}
       className={classNames(
-        "block pl-1 pb-1 text-gray-400 font-medium text-sm",
+        "block pl-1 pb-1 text-gray-400 font-medium text-sm md:text-xs lg:text-sm",
         className
       )}
       {...props}

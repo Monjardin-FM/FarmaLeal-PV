@@ -14,7 +14,7 @@ export const AppContainerBox = ({
       <div className="bg-black bg-opacity-20 w-full">
         <div
           className={clsx(
-            "flex flex-col  border border-gray-50 border-opacity-20 text-gray-100 font-normal rounded-md bg-clip-padding backdrop-filter backdrop-blur-md ",
+            "flex flex-col  border border-gray-50 border-opacity-20 text-gray-100 font-normal rounded-md   backdrop-blur-md ",
             className
           )}
           {...props}

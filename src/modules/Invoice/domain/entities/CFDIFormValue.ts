@@ -1,0 +1,21 @@
+export type CFDIFormValue = {
+  Nombre: string;
+  RFC: string;
+  TipoPersona: string;
+  RegFiscal: string;
+  CFDIUse: string;
+  TicketNumber: string;
+  TotalAmount: number;
+  FechaTicket: Date;
+  ShopPlace: string;
+  FormaPago: string;
+  MetodoPago: string;
+  Calle: string;
+  NumExt: string;
+  NumInt: string;
+  Colonia: string;
+  DelMun: string;
+  Estado: string;
+  CP: string;
+  Correo: string;
+};
